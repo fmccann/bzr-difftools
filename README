@@ -1,0 +1,52 @@
+Diff Tools Plugin for Bazaar (bzr)
+=====================================
+
+This plugin enables the use of a variety of graphical diff tools with Bazaar,
+by adding a new '--using' option to the 'bzr diff' command.  For example:
+
+   bzr diff --using kompare -r last:2 foo.c
+
+would use 'kompare' in place of the builtin 'bzr diff' behavior.
+
+If the '--using' option is omitted, then 'bzr diff' proceeds normally.  If the
+'--diff-options' is given, it will be passed through to the graphical diff tool.
+The '--prefix' option is currently ignored.  
+
+All forms of the '--revision' option are supported.
+
+To install the plugin, just copy the module into the plugins directory:
+
+   cd $WHERE_YOU_HAVE_BZR_DIFFTOOLS
+   mkdir $HOME/.bazaar/plugins/difftools
+   cp *.py $HOME/.bazaar/plugins/difftools
+
+Diff tools that are known to work with this plugin include:
+
+   fldiff
+   kdiff3
+   kompare
+   meld
+   vimdiff
+   WinMerge
+   xxdiff
+
+and any other similar tool will probably work as well.  
+
+Although many of the graphical diff tools are capable of 3-way comparisons,
+this plugin only supports 2-way comparisons, the same as the builtin 'bzr diff'
+command.
+
+
+Tips:
+
+* Adjust the preferences on the graphical diff tool to ignore the '.bzr' files.
+  Unfortunately, each tool has its own method for doing this, and most of them
+  cannot be scripted.
+
+* Add an alias to $HOME/.bazaar/bazaar.conf to save typing, for example:
+
+    [ALIASES]
+    mdiff = diff --using meld
+
+
+For more details on this plugin, run 'pydoc' on this directory.
